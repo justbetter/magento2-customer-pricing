@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_get_final_price">
+        <observer name="customer_specific_pricing" instance="JustBetter\CustomerPricing\Observer\FinalPrice" />
+    </event>
+    <event name="catalog_product_collection_load_after">
+        <observer name="custom_price_override_category" instance="JustBetter\CustomerPricing\Observer\CategoryPricing" />
+    </event>
+</config>

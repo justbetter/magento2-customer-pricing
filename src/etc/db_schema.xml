@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customer_pricing" resource="default" engine="innodb" comment="Customer Pricing Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="ID"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="int" name="customer_id" unsigned="true" nullable="false" comment="Customer ID"/>
+        <column xsi:type="decimal" name="quantity" scale="4" precision="12" nullable="false" comment="Quantity"/>
+        <column xsi:type="decimal" name="price" scale="2" precision="12" nullable="false" comment="Price"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_CUSTOMER_PRICING_PRODUCT" table="customer_pricing" column="product_id" referenceTable="catalog_product_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_CUSTOMER_PRICING_CUSTOMER" table="customer_pricing" column="customer_id" referenceTable="customer_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <index referenceId="IDX_CUSTOMER_PRICING_CUSTOMER_ID">
+            <column name="customer_id"/>
+        </index>
+        <index referenceId="IDX_CUSTOMER_PRICING_PRODUCT_ID">
+            <column name="product_id"/>
+        </index>
+    </table>
+</schema>

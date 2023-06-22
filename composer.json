@@ -1,0 +1,31 @@
+{
+  "name": "justbetter/magento2-customer-pricing",
+  "description": "Customer specific pricing module for Magento 2",
+  "keywords": [
+    "magento",
+    "magento2",
+    "pricing"
+  ],
+  "type": "magento2-module",
+  "license": [
+    "MIT"
+  ],
+  "authors": [
+    {
+      "name": "Vincent Boon",
+      "email": "vincent@justbetter.nl"
+    }
+  ],
+  "require": {
+    "ext-json": "*",
+    "magento/module-catalog": "*"
+  },
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "JustBetter\\CustomerPricing\\": "src"
+    }
+  }
+}
