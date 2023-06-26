@@ -23,7 +23,7 @@ class FinalPrice implements ObserverInterface
 
     public function execute(Observer $observer): void
     {
-        $customerId = $this->customerSession->getCustomerId();
+        $customerId = $this->userContext->getUserType() === UserContextInterface::USER_TYPE_CUSTOMER ? (int) $this->userContext->getUserId() : null;
 
         if ($customerId === null) {
             return;
@@ -43,5 +43,4 @@ class FinalPrice implements ObserverInterface
         $product->setData('price', $price);
         $observer->setData('product', $product);
     }
-
 }
