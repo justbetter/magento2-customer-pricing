@@ -5,6 +5,7 @@ namespace JustBetter\CustomerPricing\Actions;
 use JustBetter\CustomerPricing\Model\CustomerPricing;
 use JustBetter\CustomerPricing\Model\ResourceModel\CustomerPricing\Collection;
 use Psr\Log\LoggerInterface;
+use Zend_Db_Select;
 
 class CustomerPrice
 {
@@ -16,8 +17,12 @@ class CustomerPrice
 
     public function getCustomerPrice(int $productId, int $customerId, int $quantity = 1): ?float
     {
-        $customerPrices = $this->customerPricingCollection
+        $this->customerPricingCollection
             ->clear()
+            ->getSelect()
+            ->reset(Zend_Db_Select::WHERE);
+
+        $customerPrices = $this->customerPricingCollection
             ->addFieldToFilter('product_id', ['eq' => $productId])
             ->addFieldToFilter('customer_id', ['eq' => $customerId])
             ->load()
