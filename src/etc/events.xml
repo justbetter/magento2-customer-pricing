@@ -6,4 +6,7 @@
     <event name="catalog_product_collection_load_after">
         <observer name="custom_price_override_category" instance="JustBetter\CustomerPricing\Observer\CategoryPricing" />
     </event>
+    <event name="catalog_product_load_after">
+        <observer name="customer_specific_pricing" instance="JustBetter\CustomerPricing\Observer\FinalPrice" />
+    </event>
 </config>
