@@ -54,9 +54,9 @@ We accept non-breaking PR's to accept functionality.
 
 This module currently does not support pricing for specific stores / websites because we do not store a website/store id with each price.
 
-### No insights in Magento
+### No adding/updating in the Magento 2 backend
 
-There currently is no way to see the customer prices in the Magento 2 backend.
+It is currently only possible to view and delete customer specific prices in the backend.
 
 ## Contributing
 
