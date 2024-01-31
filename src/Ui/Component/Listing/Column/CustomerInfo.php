@@ -25,7 +25,6 @@ class CustomerInfo extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
-                // Assuming 'customer_id' is the field in your collection holding the customer ID
                 $customerId = $item['customer_id'];
                 $customer = $this->customerRepository->getById($customerId);
                 $customerName = $customer->getFirstname() . ' ' . $customer->getLastname();

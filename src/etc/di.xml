@@ -14,7 +14,6 @@
             <argument name="resourceModel" xsi:type="string">JustBetter\CustomerPricing\Model\ResourceModel\CustomerPricing</argument>
         </arguments>
     </type>
-
     <virtualType name="CustomerPricingDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
         <arguments>
             <argument name="collection" xsi:type="object" shared="false">JustBetter\CustomerPricing\Model\ResourceModel\CustomerPricing\Collection</argument>

@@ -2,10 +2,10 @@
 
 namespace JustBetter\CustomerPricing\Ui\Component\Listing\Column;
 
-use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Ui\Component\Listing\Columns\Column;
+use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
 
 class ProductSku extends Column
 {
@@ -14,11 +14,10 @@ class ProductSku extends Column
     public function __construct(
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
-        ProductRepositoryInterface $productRepository,
+        protected ProductResource $productResource,
         array $components = [],
         array $data = []
     ) {
-        $this->productRepository = $productRepository;
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
@@ -27,8 +26,8 @@ class ProductSku extends Column
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
                 $productId = $item['product_id'];
-                $product = $this->productRepository->getById($productId);
-                $item[$this->getData('name')] = $product->getSku();
+                $sku = $this->productResource->getProductsSku([$productId])[0] ?? [];
+                $item[$this->getData('name')] = $sku['sku'] ?? '';
             }
         }
 

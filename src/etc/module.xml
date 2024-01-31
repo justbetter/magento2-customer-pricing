@@ -4,7 +4,6 @@
         <sequence>
             <module name="Magento_Backend" />
             <module name="Magento_Catalog"/>
-            <module name="Magento_Ui" />
         </sequence>
     </module>
 </config>
