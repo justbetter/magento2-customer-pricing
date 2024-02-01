@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="JustBetter_CustomerPricing::home" title="Customer Specific Prices" module="JustBetter_CustomerPricing" sortOrder="1000" parent="Magento_Catalog::catalog_products" resource="Magento_Catalog::catalog" action="customerpricing/index/index" />
+    </menu>
+</config>
