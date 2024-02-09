@@ -32,7 +32,7 @@
     "repositories": {
         "magento": {
             "type": "composer",
-            "url": "https://repo.justbetter.nl/mirror/magento"
+            "url": "https://repo.magento.com/"
         }
     },
     "config": {
