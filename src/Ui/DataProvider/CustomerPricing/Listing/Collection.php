@@ -2,7 +2,6 @@
 
 namespace JustBetter\CustomerPricing\Ui\DataProvider\CustomerPricing\Listing;
 
-use Magento\Framework\Data\Collection\AbstractDb;
 use Magento\Framework\Data\Collection\Db\FetchStrategyInterface;
 use Magento\Framework\Data\Collection\EntityFactoryInterface;
 use Magento\Framework\Event\ManagerInterface;
@@ -20,7 +19,6 @@ class Collection extends SearchResult
         $resourceModel,
         $identifierName = null,
         $connectionName = null,
-        AbstractDb $resource = null
     ) {
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel, $identifierName, $connectionName);
     }
