@@ -18,6 +18,9 @@ jobs:
           extensions: dom, curl, libxml, mbstring, zip, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
           coverage: none
 
+      - name: Repository Credentials
+        run: composer config http-basic.repo.magento.com ${{ secrets.MAGENTO_REPO_USERNAME }} ${{ secrets.MAGENTO_REPO_PASSWORD }}
+
       - name: Install dependencies
         run: composer install --no-interaction
 
