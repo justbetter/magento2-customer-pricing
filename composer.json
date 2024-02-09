@@ -1,31 +1,47 @@
 {
-  "name": "justbetter/magento2-customer-pricing",
-  "description": "Customer specific pricing module for Magento 2",
-  "keywords": [
-    "magento",
-    "magento2",
-    "pricing"
-  ],
-  "type": "magento2-module",
-  "license": [
-    "MIT"
-  ],
-  "authors": [
-    {
-      "name": "Vincent Boon",
-      "email": "vincent@justbetter.nl"
-    }
-  ],
-  "require": {
-    "ext-json": "*",
-    "magento/module-catalog": "*"
-  },
-  "autoload": {
-    "files": [
-      "registration.php"
+    "name": "justbetter/magento2-customer-pricing",
+    "description": "Customer specific pricing module for Magento 2",
+    "keywords": [
+        "magento",
+        "magento2",
+        "pricing"
     ],
-    "psr-4": {
-      "JustBetter\\CustomerPricing\\": "src"
+    "type": "magento2-module",
+    "license": [
+        "MIT"
+    ],
+    "authors": [
+        {
+            "name": "Vincent Boon",
+            "email": "vincent@justbetter.nl"
+        }
+    ],
+    "require": {
+        "ext-json": "*",
+        "magento/module-catalog": "*",
+        "magento/module-eav": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "JustBetter\\CustomerPricing\\": "src"
+        }
+    },
+    "repositories": {
+        "magento": {
+            "type": "composer",
+            "url": "https://repo.magento.com"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "magento/composer-dependency-version-audit-plugin": true
+        }
+    },
+    "require-dev": {
+        "bitexpert/phpstan-magento": "^0.11.0",
+        "phpstan/phpstan": "^1.10"
     }
-  }
 }

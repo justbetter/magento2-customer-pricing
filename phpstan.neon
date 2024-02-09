@@ -1,0 +1,12 @@
+includes:
+	- vendor/bitexpert/phpstan-magento/extension.neon
+
+parameters:
+    paths:
+        - src
+    level: 1
+    ignoreErrors:
+        - '#JustBetter\\CustomerPricing\\Model\\ResourceModel\\CustomerPricing\\CollectionFactory#'
+        - '#JustBetter\\CustomerPricing\\Model\\ResourceModel\\CustomerPricingFactory#'
+        - '#JustBetter\\CustomerPricing\\Model\\CustomerPricingFactory#'
+        - '#Magento\\Eav\\Setup\\EavSetupFactory#'
