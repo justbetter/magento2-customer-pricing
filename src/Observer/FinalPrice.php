@@ -38,13 +38,13 @@ class FinalPrice implements ObserverInterface
             $customerId = $this->userContext->getUserType() === UserContextInterface::USER_TYPE_CUSTOMER ? (int) $this->userContext->getUserId() : null;
         }
 
-        if ($customerId === null) {
-            return;
-        }
-
         /** @var Product $product */
         $product = $observer->getProduct();
         $qty = $observer->getQty() ?? 1;
+
+        if ($customerId === null || $product->getId() === null) {
+            return;
+        }
 
         $price = $this->customerPrice->getCustomerPrice($product->getId(), $customerId, $qty);
 
