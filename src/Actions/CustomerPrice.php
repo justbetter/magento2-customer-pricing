@@ -30,7 +30,7 @@ class CustomerPrice
 
         usort(
             $customerPrices,
-            fn (CustomerPricing $a, CustomerPricing $b): bool => $a->getData('quantity') < $b->getData('quantity')
+            fn (CustomerPricing $a, CustomerPricing $b): int => $a->getData('quantity') <=> $b->getData('quantity')
         );
 
         foreach ($customerPrices as $price) {
