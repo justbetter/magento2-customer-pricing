@@ -9,10 +9,13 @@ use Magento\Catalog\Model\Product;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Area;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\State;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Store\Model\ScopeInterface;
 use Psr\Log\LoggerInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 class FinalPrice implements ObserverInterface
 {
@@ -23,7 +26,9 @@ class FinalPrice implements ObserverInterface
         protected LoggerInterface $logger,
         protected State $state,
         protected Quote $quote,
-        protected CustomerPrice $customerPrice
+        protected CustomerPrice $customerPrice,
+        protected ScopeConfigInterface $scopeConfig,
+        protected StoreManagerInterface $storeManager
     ) {
     }
 
@@ -53,7 +58,11 @@ class FinalPrice implements ObserverInterface
         }
 
         $product->setData('final_price', $price);
-        $product->setData('price', $price);
+        if ($this->scopeConfig->isSetFlag('customer_pricing/price/as_special_price', ScopeInterface::SCOPE_STORE, $this->storeManager->getStore()->getId())) {
+            $product->setData('special_price', $price);
+        } else {
+            $product->setData('price', $price);
+        }
         $observer->setData('product', $product);
     }
 }

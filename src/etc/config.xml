@@ -1,3 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customer_pricing>
+            <price>
+                <as_special_price>0</as_special_price>
+            </price>
+        </customer_pricing>
+    </default>
 </config>
