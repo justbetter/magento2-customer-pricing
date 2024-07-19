@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+    	<tab id="justbetter" translate="label" sortOrder="1">
+			<label>justbetter</label>
+		</tab>
+        <section id="customer_pricing" sortOrder="15" showInWebsite="1" showInStore="1" showInDefault="1" translate="label">
+            <label>Customer Pricing</label>
+            <tab>justbetter</tab>
+            <resource>JustBetter_CustomerPricing::config_justbetter_customer_pricing</resource>
+            <group id="price" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="as_special_price" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Set price as special price</label>
+                    <comment>Render customer price as a special price on the frontend</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
