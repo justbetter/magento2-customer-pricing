@@ -41,7 +41,7 @@ class CategoryPricing implements ObserverInterface
                 continue;
             }
 
-            if ($this->scopeConfig->isSetFlag('customer_pricing/price/as_special_price',ScopeInterface::SCOPE_STORE, $this->storeManager->getStore()->getId())) {
+            if ($this->scopeConfig->isSetFlag('customer_pricing/price/as_special_price', ScopeInterface::SCOPE_STORE, $this->storeManager->getStore()->getId())) {
                 $product->setSpecialPrice($price);
             } else {
                 $product->setPrice($price);
