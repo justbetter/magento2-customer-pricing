@@ -15,27 +15,24 @@ class CustomerPrice
     ) {
     }
 
-    public function getCustomerPrice(int $productId, int $customerId, int $quantity = 1): ?float
+    public function getCustomerPrice(int $productId, int $customerId, float $quantity = 1): ?float
     {
         $this->customerPricingCollection
             ->clear()
             ->getSelect()
-            ->reset(Zend_Db_Select::WHERE);
+            ->reset(Zend_Db_Select::WHERE)
+            ->reset(Zend_Db_Select::ORDER);
 
         $customerPrices = $this->customerPricingCollection
             ->addFieldToFilter('product_id', ['eq' => $productId])
             ->addFieldToFilter('customer_id', ['eq' => $customerId])
-            ->load()
+            ->addFieldToFilter('quantity', ['lteq' => $quantity])
+            ->setOrder('quantity')
             ->getItems();
 
-        usort(
-            $customerPrices,
-            fn (CustomerPricing $a, CustomerPricing $b): int => $a->getData('quantity') <=> $b->getData('quantity')
-        );
-
         foreach ($customerPrices as $price) {
-            if ($quantity >= $price->getData('quantity')) {
-                return $price->getData('price');
+            if ($quantity >= (float) $price->getData('quantity')) {
+                return (float) $price->getData('price');
             }
         }
 
