@@ -21,14 +21,18 @@ class CustomerInfo extends Column
         parent::__construct($context, $uiComponentFactory, $components, $data);
     }
 
-    public function prepareDataSource(array $dataSource)
+    public function prepareDataSource(array $dataSource): array
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
-                $customerId = $item['customer_id'];
-                $customer = $this->customerRepository->getById($customerId);
-                $customerName = $customer->getFirstname() . ' ' . $customer->getLastname();
-                $item[$this->getData('name')] = $customerName . ' (' . $customerId . ')';
+                try {
+                    $customerId = $item['customer_id'];
+                    $customer = $this->customerRepository->getById($customerId);
+                    $customerName = $customer->getFirstname() . ' ' . $customer->getLastname();
+                    $item[$this->getData('name')] = $customerName . ' (' . $customerId . ')';
+                } catch (\Exception $e) {
+                    $item[$this->getData('name')] = '-';
+                }
             }
         }
 
