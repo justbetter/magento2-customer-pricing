@@ -6,6 +6,7 @@ parameters:
         - src
     level: 1
     ignoreErrors:
+        - '#Magento\\Customer\\Model\\ResourceModel\\Customer\\CollectionFactory#'
         - '#JustBetter\\CustomerPricing\\Model\\ResourceModel\\CustomerPricing\\CollectionFactory#'
         - '#JustBetter\\CustomerPricing\\Model\\ResourceModel\\CustomerPricingFactory#'
         - '#JustBetter\\CustomerPricing\\Model\\CustomerPricingFactory#'

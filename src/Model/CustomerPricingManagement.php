@@ -4,10 +4,11 @@ namespace JustBetter\CustomerPricing\Model;
 
 use JustBetter\CustomerPricing\Api\CustomerPricingManagementInterface;
 use JustBetter\CustomerPricing\Model\CustomerPricingFactory as ModelFactory;
-use JustBetter\CustomerPricing\Model\ResourceModel\CustomerPricingFactory as ResourceModelFactory;
 use JustBetter\CustomerPricing\Model\ResourceModel\CustomerPricing\Collection;
+use JustBetter\CustomerPricing\Model\ResourceModel\CustomerPricingFactory as ResourceModelFactory;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Model\Product;
+use Magento\Customer\Model\ResourceModel\Customer\CollectionFactory as CustomerCollectionFactory;
 
 class CustomerPricingManagement implements CustomerPricingManagementInterface
 {
@@ -15,15 +16,26 @@ class CustomerPricingManagement implements CustomerPricingManagementInterface
         protected ProductRepositoryInterface $productRepository,
         protected ModelFactory $customerFactory,
         protected ResourceModelFactory $customerPricingFactory,
-        protected Collection $customerPricingCollection
-    ) {
-    }
+        protected Collection $customerPricingCollection,
+        protected CustomerCollectionFactory $customerCollectionFactory
+    ) {}
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function saveCustomerPrices(string $sku, mixed $customerPrices): bool
     {
+        $customerIds = array_unique(array_column($customerPrices, 'customer_id'));
+
+        $customerCollection = $this->customerCollectionFactory->create()
+            ->addFieldToFilter('entity_id', ['in' => $customerIds])
+            ->addFieldToSelect('entity_id');
+
+        $validCustomerIds = array_map(
+            static fn ($customer) => (int) $customer->getId(),
+            $customerCollection->getItems()
+        );
+
         /** @var Product $product */
         $product = $this->productRepository->get($sku);
 
@@ -42,6 +54,10 @@ class CustomerPricingManagement implements CustomerPricingManagementInterface
             $customerId = $customerPriceData['customer_id'];
             $quantity = $customerPriceData['quantity'];
             $price = $customerPriceData['price'];
+
+            if (! in_array($customerId, $validCustomerIds)) {
+                continue;
+            }
 
             $updated = false;
 

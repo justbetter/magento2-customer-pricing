@@ -19,6 +19,7 @@
     "require": {
         "ext-json": "*",
         "magento/module-catalog": "*",
+        "magento/module-customer": "*",
         "magento/module-eav": "*"
     },
     "autoload": {
