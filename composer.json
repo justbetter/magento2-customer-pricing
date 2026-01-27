@@ -20,7 +20,8 @@
         "ext-json": "*",
         "magento/module-catalog": "*",
         "magento/module-customer": "*",
-        "magento/module-eav": "*"
+        "magento/module-eav": "*",
+        "justbetter/magento2-core": "^1.0"
     },
     "autoload": {
         "files": [
